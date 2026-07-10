@@ -12,6 +12,17 @@ module Api
         render json: { transfer: ::TransferBlueprint.render_as_hash(response[:transfer]) }, status: :created
       end
 
+      def debit
+        response = Transfers::DebitTransferService.new(transfer_params[:amount])
+                                                   .call()
+
+        unless response[:success]
+          return render json: { errors: response[:errors] }, status: :unprocessable_entity
+        end
+
+        render json: { transfer: ::TransferBlueprint.render_as_hash(response[:transfer]) }, status: :created
+      end
+
       private
 
       def transfer_params

@@ -1,7 +1,7 @@
 require "test_helper"
 
-class Transfers::CreditTransferServiceTest < ActiveSupport::TestCase
-  test "creates a credit transfer" do
+class Transfers::DebitTransferServiceTest < ActiveSupport::TestCase
+  test "creates a debit transfer" do
     fake_transfer_class = Class.new do
       attr_reader :direction, :amount
 
@@ -20,11 +20,11 @@ class Transfers::CreditTransferServiceTest < ActiveSupport::TestCase
     end
 
     with_constant_replaced(Object, :Transfer, fake_transfer_class) do
-      result = Transfers::CreditTransferService.new(50.5).call
+      result = Transfers::DebitTransferService.new(50.5).call
 
       assert result[:success]
       assert_instance_of fake_transfer_class, result[:transfer]
-      assert_equal "credit", result[:transfer].direction
+      assert_equal "debit", result[:transfer].direction
       assert_equal 50.5, result[:transfer].amount.to_f
     end
   end
@@ -45,7 +45,7 @@ class Transfers::CreditTransferServiceTest < ActiveSupport::TestCase
     end
 
     with_constant_replaced(Object, :Transfer, fake_transfer_class) do
-      result = Transfers::CreditTransferService.new(0).call
+      result = Transfers::DebitTransferService.new(0).call
 
       assert_not result[:success]
       assert result[:errors].present?

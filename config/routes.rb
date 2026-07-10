@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :transfers do
         collection do
           post :credit, to: "transfers#credit", as: "credit_transfer"
+          post :debit, to: "transfers#debit", as: "debit_transfer"
         end
       end
     end

@@ -1,10 +1,6 @@
 require "test_helper"
 
 class TransferTest < ActiveSupport::TestCase
-  setup do
-    Transfer.delete_all
-  end
-
   test "is valid with a positive amount and a supported direction" do
     transfer = Transfer.new(amount: 10.25, direction: "credit")
 
