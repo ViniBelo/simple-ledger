@@ -7,4 +7,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  namespace :api do
+    namespace :v1 do
+      resources :transfers do
+        collection do
+          post :credit, to: "transfers#credit", as: "credit_transfer"
+        end
+      end
+    end
+  end
 end
