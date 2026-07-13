@@ -6,7 +6,7 @@ module Api
                                                    .call()
 
         unless response[:success]
-          return render json: { errors: response[:errors] }, status: :unprocessable_entity
+          return render json: { errors: response[:errors] }, status: :unprocessable_content
         end
 
         render json: { transfer: ::TransferBlueprint.render_as_hash(response[:transfer]) }, status: :created
@@ -17,7 +17,7 @@ module Api
                                                    .call()
 
         unless response[:success]
-          return render json: { errors: response[:errors] }, status: :unprocessable_entity
+          return render json: { errors: response[:errors] }, status: :unprocessable_content
         end
 
         render json: { transfer: ::TransferBlueprint.render_as_hash(response[:transfer]) }, status: :created

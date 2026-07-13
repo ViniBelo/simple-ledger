@@ -12,7 +12,7 @@ RSpec.describe "Api::V1::Transfers", type: :request do
 
     it "returns unprocessable for invalid transfer" do
       post credit_transfer_api_v1_transfers_path, params: { transfer: { amount: 0 } }
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
       json = JSON.parse(response.body)
       expect(json["errors"]).to be_present
     end
@@ -29,7 +29,7 @@ RSpec.describe "Api::V1::Transfers", type: :request do
 
     it "returns unprocessable for invalid transfer" do
       post debit_transfer_api_v1_transfers_path, params: { transfer: { amount: 0 } }
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
       json = JSON.parse(response.body)
       expect(json["errors"]).to be_present
     end

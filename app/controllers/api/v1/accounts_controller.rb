@@ -5,7 +5,7 @@ class Api::V1::AccountsController < ApplicationController
                                                              account_params[:balance]).call
 
     unless response[:success]
-      return render json: { errors: response[:errors] }, status: :unprocessable_entity
+      return render json: { errors: response[:errors] }, status: :unprocessable_content
     end
 
     render json: { account: AccountBlueprint.render_as_hash(response[:account]) }, status: :created
