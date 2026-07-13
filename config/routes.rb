@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   namespace :api do
     namespace :v1 do
+      resources :accounts, only: %w[create]
       resources :transfers do
         collection do
           post :credit, to: "transfers#credit", as: "credit_transfer"
